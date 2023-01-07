@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const db = require("../config/keys.js").MONGO_URI;
-
+const db = require("../config/keys.js").mongoURI;
+const models = require("./models/index");
 const app = express();
 
 if (!db) {
@@ -16,8 +16,17 @@ mongoose
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
 
-// We use body-parser in order to be able to parse
-// incoming requests in middleware before they are handled
+const expressGraphQL = require("express-graphql").graphqlHTTP;
+const schema = require("./schema/schema");
+
+app.use(
+    "/graphql",
+    expressGraphQL({
+        schema,
+        graphiql: true 
+    })
+)
+
 app.use(bodyParser.json());
 
 module.exports = app;
