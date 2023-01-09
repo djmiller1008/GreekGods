@@ -38,7 +38,7 @@ const mutation = new GraphQLObjectType({
             type: { type: GraphQLString },
             description: { type: GraphQLString }
         },
-        resolve(parentValue, { id, name, type, description }) {
+        resolve (parentValue, { id, name, type, description }) {
             const updateObj = {};
             // we can create our own object here and pass in the variables is they exist
             updateObj.id = id;
@@ -51,6 +51,18 @@ const mutation = new GraphQLObjectType({
             });
         }
     },
+
+    addGodRelative: {
+        type: GodType,
+        args: {
+            godId: { type: GraphQLID },
+            relativeId: { type: GraphQLID },
+            relationship: { type: GraphQLString }
+        },
+        resolve(parentValue, { godId, relativeId, relationship }) {
+            return God.addRelative(godId, relativeId, relationship);
+        }
+    }
   },
 
 
