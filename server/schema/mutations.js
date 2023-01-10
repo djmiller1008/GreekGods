@@ -1,6 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
 const mongoose = require("mongoose");
+const EmblemType = require("./emblem_type");
 const God = mongoose.model("god");
 const GodType = require("./god_type");
 
@@ -61,6 +62,29 @@ const mutation = new GraphQLObjectType({
         },
         resolve(parentValue, { godId, relativeId, relationship }) {
             return God.addRelative(godId, relativeId, relationship);
+        }
+    },
+
+    removeGodRelative: {
+        type: GodType,
+        args: {
+            godId: { type: GraphQLID },
+            relativeId: { type: GraphQLID },
+            relationship: { type: GraphQLString }
+        },
+        resolve(parentValue, { godId, relativeId, relationship }) {
+            return God.removeRelative(godId, relativeId, relationship)
+        }
+    },
+
+    addGodEmblem: {
+        type: EmblemType,
+        args: {
+            godId: { type: GraphQLID },
+            emblemId: { type: GraphQLID }
+        },
+        resolve(parentValue, { godId, emblemId }) {
+            return God.addEmblem(godId, emblemId);
         }
     }
   },
