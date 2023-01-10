@@ -42,7 +42,7 @@ const mutation = new GraphQLObjectType({
         },
         resolve (parentValue, { id, name, type, description }) {
             const updateObj = {};
-            // we can create our own object here and pass in the variables is they exist
+            
             updateObj.id = id;
             if (name) updateObj.name = name;
             if (type) updateObj.type = type;
@@ -121,9 +121,24 @@ const mutation = new GraphQLObjectType({
         resolve(parentValue, { godId, domain }) {
             return God.findById(godId)
                 .then(god => {
-                    god.domains.push(domain)
+                    god.domains.push(domain);
                     return god.save().then(god => god);
                 });
+        }
+    },
+
+    removeGodDomain: {
+        type: GodType,
+        args: {
+            godId: { type: GraphQLID },
+            domain: { type: GraphQLString }
+        },
+        resolve(parentValue, { godId, domain }) {
+            return God.findById(godId)
+                .then(god => {
+                    god.domains.pull(domain);
+                    return god.save().then(god => god);
+                })
         }
     }
   },
