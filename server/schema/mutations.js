@@ -110,6 +110,21 @@ const mutation = new GraphQLObjectType({
             return God.updateAbode(godId, abodeId);
         } 
  
+    },
+
+    addGodDomain: {
+        type: GodType,
+        args: {
+            godId: { type: GraphQLID },
+            domain: { type: GraphQLString }
+        },
+        resolve(parentValue, { godId, domain }) {
+            return God.findById(godId)
+                .then(god => {
+                    god.domains.push(domain)
+                    return god.save().then(god => god);
+                });
+        }
     }
   },
 
