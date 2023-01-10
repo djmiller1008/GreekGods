@@ -53,8 +53,8 @@ const GodSchema = new Schema({
 GodSchema.statics.findRelatives = function(godId, type) {
     return this.findById(godId)
         .populate(`${type}`)
-        .then(god => god[type])
-}
+        .then(god => god[type]);
+};
 
 GodSchema.statics.addRelative = function(godId, relativeId, relationship) {
   const God = mongoose.model("god");
@@ -80,14 +80,14 @@ GodSchema.statics.addRelative = function(godId, relativeId, relationship) {
             god.siblings.push(relative);
             relative.siblings.push(god);
             break;
-        }
+        };
     
        
         return Promise.all([god.save(), relative.save()]).then(
           ([god, relative]) => god
         );
-    })
-}
+    });
+};
 
 GodSchema.statics.removeRelative = function(godId, relativeId, relationship) {
   const God = mongoose.model("god");
@@ -113,14 +113,14 @@ GodSchema.statics.removeRelative = function(godId, relativeId, relationship) {
             god.siblings.pull(relative);
             relative.siblings.pull(god);
             break;
-        }
+        };
     
        
         return Promise.all([god.save(), relative.save()]).then(
           ([god, relative]) => god
         );
-    })
-}
+    });
+};
 
 GodSchema.statics.addEmblem = function(godId, emblemId) {
   const God = mongoose.model("god");
@@ -142,12 +142,45 @@ GodSchema.statics.addEmblem = function(godId, emblemId) {
         emblem.gods.push(god);
         return Promise.all([god.save(), emblem.save()]).then(
           ([god, emblem]) => god
-        )
-      }
+        );
+      };
       
-    })
+    });
   });
+};
 
-}
+GodSchema.statics.removeEmblem = function(godId, emblemId) {
+  const God = mongoose.model("god");
+  const Emblem = mongoose.model("emblem");
+  return God.findById(godId).then(god => {
+    return Emblem.findById(emblemId).then(emblem => {
+      god.emblems.pull(emblem);
+      emblem.gods.pull(god);
+
+      return Promise.all([god.save(), emblem.save()])
+        .then(([god, emblem]) => god);
+    });
+  });
+};
+
+GodSchema.statics.updateAbode = function(godId, abodeId) {
+  const God = mongoose.model("god");
+  const Abode = mongoose.model("abode");
+
+  return God.findById(godId).then(god => {
+    return Abode.findById(abodeId).then(newAbode => {
+      if (god.abode) {
+        Abode.findById(god.abode).then(oldAbode => {
+          oldAbode.gods.pull(god);
+          return oldAbode.save();
+        })
+      }
+      god.abode = newAbode;
+      newAbode.gods.push(god);
+      return Promise.all([god.save(), newAbode.save()])
+        .then(([god, newAbode]) => god);
+    });
+  });
+};
 
 module.exports = mongoose.model("god", GodSchema);
