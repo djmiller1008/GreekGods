@@ -8,6 +8,7 @@ const AbodeType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
+        coordinates: { type: GraphQLString },
         gods: {
             type: new GraphQLList(require("./god_type")),
             resolve(parentValue) {
