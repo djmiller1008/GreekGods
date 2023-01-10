@@ -1,6 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
 const mongoose = require("mongoose");
+const AbodeType = require("./abode_type");
 const EmblemType = require("./emblem_type");
 const God = mongoose.model("god");
 const GodType = require("./god_type");
@@ -86,6 +87,29 @@ const mutation = new GraphQLObjectType({
         resolve(parentValue, { godId, emblemId }) {
             return God.addEmblem(godId, emblemId);
         }
+    },
+
+    removeGodEmblem: {
+        type: EmblemType,
+        args: {
+            godId: { type: GraphQLID },
+            emblemId: { type: GraphQLID }
+        },
+        resolve(parentValue, { godId, emblemId }) {
+            return God.removeEmblem(godId, emblemId);
+        }
+    },
+
+    updateGodAbode: {
+        type: AbodeType,
+        args: {
+            godId: { type: GraphQLID },
+            abodeId: { type: GraphQLID }
+        },
+        resolve(parentValue, { godId, abodeId }) {
+            return God.updateAbode(godId, abodeId);
+        } 
+ 
     }
   },
 
