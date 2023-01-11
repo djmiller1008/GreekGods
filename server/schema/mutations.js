@@ -3,6 +3,7 @@ const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
 const mongoose = require("mongoose");
 const Abode = mongoose.model("abode");
 const AbodeType = require("./abode_type");
+const Emblem = mongoose.model("emblem");
 const EmblemType = require("./emblem_type");
 const God = mongoose.model("god");
 const GodType = require("./god_type");
@@ -177,6 +178,42 @@ const mutation = new GraphQLObjectType({
             if (coordinates) updateObj.coordinates = coordinates;
             console.log("hi");
             return Abode.findOneAndUpdate({ _id: id }, { $set: updateObj }, { new: true });
+        }
+    },
+
+    newEmblem: {
+        type: EmblemType, 
+        args: {
+            name: { type: GraphQLString }
+        },
+        resolve(parentValue, { name }) {
+            return new Emblem({ name }).save();
+        }
+    },
+
+    deleteEmblem: {
+        type: EmblemType,
+        args: {
+            id: { type: GraphQLID }
+        },
+        resolve(parentValue, { id }) {
+            return Emblem.findOneAndDelete({_id: id});
+        }
+    },
+
+    updateEmblem: {
+        type: EmblemType,
+        args: {
+            id: { type: GraphQLID },
+            name: { type: GraphQLString }
+        },
+        resolve(parentValue, { id, name }) {
+            const updateObj = {};
+            updateObj.id = id;
+
+            if (name) updateObj.name = name;
+
+            return Emblem.findOneAndUpdate({_id: id}, { $set: updateObj }, {new: true})
         }
     }
   },
