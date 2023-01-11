@@ -49,9 +49,7 @@ const mutation = new GraphQLObjectType({
             if (type) updateObj.type = type;
             if (description) updateObj.description = description;
     
-            return God.findOneAndUpdate({ _id: id }, { $set: updateObj }, { new: true }, (err, god) => {
-                return god;
-            });
+            return God.findOneAndUpdate({ _id: id }, { $set: updateObj }, { new: true });
         }
     },
 
@@ -151,6 +149,34 @@ const mutation = new GraphQLObjectType({
         },
         resolve(parentValue, { name, coordinates }) {
             return new Abode({ name, coordinates }).save();
+        }
+    },
+
+    deleteAbode: {
+        type: AbodeType,
+        args: {
+            id: { type: GraphQLID }
+        },
+        resolve(parentValue, { id }) {
+            return Abode.findOneAndDelete({_id: id});
+        }
+    },
+
+    updateAbode: {
+        type: AbodeType,
+        args: {
+            id: { type: GraphQLID },
+            name: { type: GraphQLString },
+            coordinates: { type: GraphQLString }
+        },
+        resolve(parentValue, { id, name, coordinates } ) {
+            const updateObj = {};
+            
+            updateObj.id = id;
+            if (name) updateObj.name = name;
+            if (coordinates) updateObj.coordinates = coordinates;
+            console.log("hi");
+            return Abode.findOneAndUpdate({ _id: id }, { $set: updateObj }, { new: true });
         }
     }
   },
