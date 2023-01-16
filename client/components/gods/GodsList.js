@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
-import queries from "../../graphql/queries";
+import Queries from "../../graphql/queries";
+import DeleteGod from "./DeleteGod";
 
-const FETCH_GODS = queries.FETCH_GODS;
+const { FETCH_GODS } = Queries;
 
 const GodsList = () => (
     <div className="outer">
@@ -19,6 +20,7 @@ const GodsList = () => (
                                 <h4>{name}</h4>
                             </Link>
                             <p className="description">Description: {description}</p>
+                            <DeleteGod id={id} />
                         </li>
                     ))
                 }}
