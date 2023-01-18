@@ -58,7 +58,8 @@ const EmblemCreate = () => {
                 return (
                     <div>
                         <form onSubmit={e => handleSubmit(e, newGod)}>
-                            <input onChange={e => handleInput(e, "name")} type="text" />
+                            <label htmlFor="name">Name</label>
+                            <input name="name" onChange={e => handleInput(e, "name")} type="text" />
                             <input type="submit" value="Create Emblem" />
                         </form>
                         <p>{emblemData.message}</p>
