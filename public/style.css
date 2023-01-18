@@ -3,6 +3,12 @@ body {
     padding: 10px 100px;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+
+}
+
 .outer ul {
     margin-block-start: 0 !important;
     padding-inline-start: 0 !important;
@@ -59,4 +65,19 @@ form * {
 
 .custom-icon {
     margin-right: 5px;
+}
+
+.nav {
+    display: flex;
+
+}
+
+.nav-link {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+    color: gray;
 }
