@@ -69,9 +69,12 @@ const GodCreate = () => {
                 return (
                     <div>
                         <form onSubmit={(e) => handleSubmit(e, newGod)}>
-                                <input onChange={(e) => handleInput(e, "name")} type="text"></input>
+                                <label htmlFor="name">Name</label>
+                                <input name="name" onChange={(e) => handleInput(e, "name")} type="text"></input>
+                                <label htmlFor="description">Description</label>
                                 <textarea onChange={(e) => handleInput(e, "description")}></textarea>
-                                <select onChange={(e) => handleInput(e, "type")}>
+                                <label htmlFor="type">Gender</label>
+                                <select name="type" onChange={(e) => handleInput(e, "type")}>
                                     <option value="god">God</option>
                                     <option value="goddess">Goddess</option>
                                 </select>
