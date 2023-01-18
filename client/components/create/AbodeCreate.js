@@ -64,9 +64,9 @@ const AbodeCreate = () => {
                 return (
                     <div>
                         <form onSubmit={e => handleSubmit(e, newAbode)}>
-                            <label for="name">Name</label>
+                            <label htmlFor="name">Name</label>
                             <input onChange={(e) => handleInput(e, "name")} name="name" type="text" />
-                            <label for="coordinates">Coordinates</label>
+                            <label htmlFor="coordinates">Coordinates</label>
                             <input onChange={(e) => handleInput(e, "coordinates")} name="coordinates" type="text" />
                             <input type="submit" value="Create Abode" />
                         </form>
