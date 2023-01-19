@@ -64,5 +64,32 @@ export default {
                 description
             }
         }
+    `,
+
+    ADD_GOD_DOMAIN: gql`
+        mutation AddGodDomain($id: ID!, $domain: String) {
+            addGodDomain(godId: $id, domain: $domain) {
+                id,
+                domains
+            }
+        }
+    `,
+
+    DELETE_GOD_DOMAIN: gql`
+        mutation DeleteGodDomain($id: ID!, $domain: String) {
+            removeGodDomain(godId: $id, domain: $domain) {
+                id,
+                domains
+            }
+        }
+    `,
+
+    UPDATE_GOD_ABODE: gql`
+        mutation UpdateGodAbode($godId: ID!, $abodeId: ID!) {
+            updateGodAbode(godId: $godId, abodeId: $abodeId) {
+                id
+            }
+        }   
     `
+
 }
