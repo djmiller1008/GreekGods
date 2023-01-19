@@ -34,7 +34,7 @@ const DescriptionDetail = props => {
                         <div>
                             <form onSubmit={e => handleSubmit(e, updateGod)}>
                                 <label htmlFor="description">Description</label>
-                                <textarea name="description" type="text" value={description} onChange={e => handleInput(e)} />
+                                <textarea name="description" type="text" value={description} onChange={handleInput} />
                                 <input type="submit" value="Update Description" />
                             </form>
                         </div>
@@ -45,7 +45,7 @@ const DescriptionDetail = props => {
         return (
             <div className="detail-div">
                 <h3>{description}</h3>
-                <button className="edit-button" onClick={e => handleEdit(e)}>Edit</button>
+                <button className="edit-button" onClick={handleEdit}>Edit</button>
             </div>
         );
     }
