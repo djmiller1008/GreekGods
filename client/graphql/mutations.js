@@ -55,5 +55,14 @@ export default {
                 type
             }
         }
+    `,
+
+    UPDATE_GOD_DESCRIPTION: gql`
+        mutation UpdateGodDescription($id: ID!, $description: String) {
+            updateGod(id: $id, description: $description) {
+                id,
+                description
+            }
+        }
     `
 }
