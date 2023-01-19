@@ -79,7 +79,7 @@ const mutation = new GraphQLObjectType({
     },
 
     addGodEmblem: {
-        type: EmblemType,
+        type: GodType,
         args: {
             godId: { type: GraphQLID },
             emblemId: { type: GraphQLID }
@@ -90,7 +90,7 @@ const mutation = new GraphQLObjectType({
     },
 
     removeGodEmblem: {
-        type: EmblemType,
+        type: GodType,
         args: {
             godId: { type: GraphQLID },
             emblemId: { type: GraphQLID }
@@ -101,7 +101,7 @@ const mutation = new GraphQLObjectType({
     },
 
     updateGodAbode: {
-        type: AbodeType,
+        type: GodType,
         args: {
             godId: { type: GraphQLID },
             abodeId: { type: GraphQLID }
@@ -125,7 +125,7 @@ const mutation = new GraphQLObjectType({
                     return god.save().then(god => god);
                 });
         }
-    },
+    }, 
 
     removeGodDomain: {
         type: GodType,
