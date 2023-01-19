@@ -37,9 +37,8 @@ const GodCreate = () => {
         })
     }
 
-    const updateCache = (cache, data) => {
+    const updateCache = (cache, { data: { newGod }}) => {
         let gods;
-        debugger
         try {
           // we'll try to read from our cache but if the query isn't in there no sweat!
           // We only want to update the data if it's in the cache already - totally fine if the data will
