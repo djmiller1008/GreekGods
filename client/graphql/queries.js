@@ -40,7 +40,7 @@ export default {
     `,
 
     FETCH_GOD: gql`
-        query FetchGod($id: ID) {
+        query FetchGod($id: ID!) {
             god(id: $id) {
                 id,
                 name,
