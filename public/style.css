@@ -81,3 +81,19 @@ form * {
     cursor: pointer;
     color: gray;
 }
+
+.detail-div {
+    display: flex;
+    align-items: baseline;
+
+}
+
+.edit-button {
+    margin-left: 1rem;
+    border: none;
+}
+
+.edit-button:hover {
+    cursor: pointer;
+    color: darkgrey;
+}
