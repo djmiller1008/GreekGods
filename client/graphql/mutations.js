@@ -37,5 +37,14 @@ export default {
                 coordinates
             }
         }
+    `,
+
+    UPDATE_GOD_NAME: gql`
+        mutation UpdateGodName($id: ID!, $name: String) {
+            updateGod(id: $id, name: $name) {
+                id,
+                name
+            }
+        }
     `
 }
