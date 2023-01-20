@@ -87,9 +87,37 @@ export default {
     UPDATE_GOD_ABODE: gql`
         mutation UpdateGodAbode($godId: ID!, $abodeId: ID!) {
             updateGodAbode(godId: $godId, abodeId: $abodeId) {
-                id
+                id,
+                abode {
+                    name,
+                    id
+                }
             }
         }   
+    `,
+
+    ADD_GOD_EMBLEM: gql`
+        mutation AddGodEmblem($godId: ID!, $emblemId: ID!) {
+            addGodEmblem(godId: $godId, emblemId: $emblemId) {
+                id,
+                emblems {
+                    name,
+                    id
+                }
+            }
+        }
+    `,
+
+    REMOVE_GOD_EMBLEM: gql`
+        mutation RemoveGodEmblem($godId: ID!, $emblemId: ID!) {
+            removeGodEmblem(godId: $godId, emblemId: $emblemId) {
+                id,
+                emblems {
+                    name,
+                    id
+                }
+            }
+        }
     `
 
 }
