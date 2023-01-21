@@ -118,6 +118,40 @@ export default {
                 }
             }
         }
+    `,
+
+    ADD_GOD_RELATIVE: gql`
+        mutation AddGodRelative($godId: ID!, $relativeId: ID!, $relationship: String) {
+            addGodRelative(godId: $godId, relativeId: $relativeId, relationship: $relationship) {
+                id,
+                siblings {
+                    name, id
+                },
+                parents {
+                    name, id
+                },
+                children {
+                    name, id
+                }
+            }
+        }
+    `,
+
+    REMOVE_GOD_RELATIVE: gql`
+        mutation RemoveGodRelative($godId: ID!, $relativeId: ID!, $relationship: String) {
+            removeGodRelative(godId: $godId, relativeId: $relativeId, relationship: $relationship) {
+                id,
+                siblings {
+                    name, id
+                },
+                parents {
+                    name, id
+                },
+                children {
+                    name, id
+                }
+            }
+        }
     `
 
 }
