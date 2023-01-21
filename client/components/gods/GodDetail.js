@@ -7,6 +7,7 @@ import DescriptionDetail from "./detail/DescriptionDetail";
 import DomainDetail from "./detail/DomainDetail";
 import AbodeDetail from "./detail/AbodeDetail";
 import EmblemDetail from "./detail/EmblemDetail";
+import RelativesDetail from "./detail/RelativesDetail";
 const { FETCH_GOD } = Queries;
 
 const GodDetail = props => {
@@ -23,6 +24,9 @@ const GodDetail = props => {
                         <DomainDetail id={data.god.id} domains={data.god.domains} />
                         <AbodeDetail id={data.god.id} abode={data.god.abode} />
                         <EmblemDetail id={data.god.id} emblems={data.god.emblems} />
+                        <RelativesDetail id={data.god.id} relationship={"parent"} relatives={data.god.parents} />
+                        <RelativesDetail id={data.god.id} relationship={"child"} relatives={data.god.children} />
+                        <RelativesDetail id={data.god.id} relationship={"sibling"} relatives={data.god.siblings} />
                     </div>
                 );
             }}
